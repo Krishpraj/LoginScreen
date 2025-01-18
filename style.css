@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+.task-list {
+    margin-top: 20px;
+}
+.task-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+.task-list li {
+    background: #f4f4f4;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+.task-list button {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.task-list button:hover {
+    background: #cc0000;
+}

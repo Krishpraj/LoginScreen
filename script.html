@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Task List</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <script type="text/javascript"></script>
+    </body>
+</html>
+
+<body>
+    <h1>Task Manager</h1>
+    <input type="text" id="taskInput" placeholder="Enter a task" />
+    <button onclick="addTask()">Add Task</button>
+
+    <div class="task-list">
+        <h2>Tasks:</h2>
+        <ul id="taskList"></ul>
+    </div>
+
+    <script>
+        class Node {
+            constructor(task) {
+                this.task = task;
+                this.next = null;
+            }
+        }
+
+        class LinkedList {
+            constructor() {
+                this.head = null;
+            }
+
+            add(task) {
+                const node = new Node(task);
+                if (this.head === null) {
+                    this.head = node;
+                } else {
+                    let current = this.head;
+                    while (current.next !== null) {
+                        current = current.next;
+                    }
+                    current.next = node;
+                }
+            }
+
+            remove(task) {
+                if (this.head === null) {
+                    return;
+                }
+                if (this.head.task === task) {
+                    this.head = this.head.next;
+                    return;
+                }
+                let current = this.head;
+                while (current.next !== null) {
+                    if (current.next.task === task) {
+                        current.next = current.next.next;
+                        return;
+                    }
+                    current = current.next;
+                }
+            }
+
+            getAllTasks() {
+                const tasks = [];
+                let current = this.head;
+                while (current !== null) {
+                    tasks.push(current.task);
+                    current = current.next;
+                }
+                return tasks;
+            }
+        }
+
+        const taskManager = new LinkedList();
+
+        // Function to add a task
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const task = taskInput.value.trim();
+            if (task) {
+                taskManager.add(task);
+                taskInput.value = ""; // Clear the input
+                displayTasks();
+            } else {
+                alert("Please enter a task!");
+            }
+        }
+
+        // Function to remove a task
+        function removeTask(task) {
+            taskManager.remove(task);
+            displayTasks();
+        }
+
+        // Function to display tasks
+        function displayTasks() {
+            const taskList = document.getElementById("taskList");
+            taskList.innerHTML = ""; // Clear the list
+            const tasks = taskManager.getAllTasks();
+            tasks.forEach(task => {
+            const li = document.createElement("li");
+            li.textContent = task;
+
+            const removeBtn = document.createElement("button");
+            removeBtn.textContent = "Remove";
+            removeBtn.onclick = () => removeTask(task);
+
+            li.appendChild(removeBtn);
+            taskList.appendChild(li);
+
+            });
+        }
+    </script>
+</body>
+</html>
