@@ -1,6 +1,7 @@
-# React + Vite
+# Task Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Task Manager app using react, tailwind css, express, and sql
+
 
 Currently, two official plugins are available:
 
